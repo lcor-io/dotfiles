@@ -902,6 +902,7 @@ alias oups = git reset --soft HEAD~1
 alias ywg = cd ~/Documents/yupwego
 alias pn = pnpm
 def ywg-start [] { ywg | env.starter/start.py --restart }
+alias lzd = lazydocker
 
 # Setup default editor
 $env.config.buffer_editor = "nvim"
