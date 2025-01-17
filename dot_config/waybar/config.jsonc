@@ -87,13 +87,13 @@
   "memory": {
     "interval": 1,
     "rotate": 270,
-    "format": "{icon}",
+    "format": "<span>{icon}</span>",
     "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
     "max-length": 10,
   },
   "cpu": {
     "interval": 1,
-    "format": "{icon}",
+    "format": "<span>{icon}</span>",
     "rotate": 270,
     "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
   },

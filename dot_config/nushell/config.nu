@@ -897,12 +897,21 @@ $env.config = {
     ]
 }
 
-# Setup aliases
+# Setup GIT aliases
+alias gp = git pull
+alias gs = git status
 alias oups = git reset --soft HEAD~1
+alias chezmoi cd = cd "/home/leoco/.local/share/chezmoi"
+
+# Setup Yupwego aliases
 alias ywg = cd ~/Documents/yupwego
-alias pn = pnpm
 def ywg-start [] { ywg | env.starter/start.py --restart }
+
+# Setup various aliases
+alias pn = pnpm
 alias lzd = lazydocker
+alias ssh = wezterm ssh
+alias shutdown = systemctl poweroff
 
 # Setup default editor
 $env.config.buffer_editor = "nvim"
