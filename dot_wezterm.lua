@@ -10,7 +10,7 @@ config.font = wezterm.font("FiraCode Nerd Font")
 
 -- Style the window
 config.window_background_opacity = 0.9
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.enable_scroll_bar = false
 config.inactive_pane_hsb = {}
 config.window_padding = {
@@ -116,14 +116,14 @@ wezterm.on(
   function(tab, tabs, panes, config, hover, max_width)
     local edge_background = '#24273a'
     local background = '#24273a'
-    local foreground = '#c0c0c0'
+    local foreground = '#cad3f5'
 
     if tab.is_active then
       background = "#24273a"
-      foreground = "#cad3f5"
+      foreground = "#b7bdf8"
     elseif hover then
-      background = '#3b3052'
-      foreground = '#909090'
+      background = "#24273a"
+      foreground = "#b7bdf8"
     end
 
     local edge_foreground = background
