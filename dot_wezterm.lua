@@ -10,8 +10,9 @@ config.font = wezterm.font("FiraCode Nerd Font")
 
 -- Style the window
 config.window_background_opacity = 0.9
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 config.enable_scroll_bar = false
+config.inactive_pane_hsb = {}
 config.window_padding = {
 	left = 2,
 	right = 0,
@@ -50,8 +51,6 @@ config.colors = {
 	},
 }
 
-config.inactive_pane_hsb = {}
-
 -- Key bindings
 local act = wezterm.action
 config.keys = {
@@ -61,10 +60,10 @@ config.keys = {
 	{ key = "l", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(1) },
 
 	-- Navigate panes
-	{ key = "h", mods = "CTRL",       action = act.ActivatePaneDirection("Left") },
-	{ key = "j", mods = "CTRL",       action = act.ActivatePaneDirection("Down") },
-	{ key = "k", mods = "CTRL",       action = act.ActivatePaneDirection("Up") },
-	{ key = "l", mods = "CTRL",       action = act.ActivatePaneDirection("Right") },
+	{ key = "h", mods = "CTRL", action = act.ActivatePaneDirection("Left") },
+	{ key = "j", mods = "CTRL", action = act.ActivatePaneDirection("Down") },
+	{ key = "k", mods = "CTRL", action = act.ActivatePaneDirection("Up") },
+	{ key = "l", mods = "CTRL", action = act.ActivatePaneDirection("Right") },
 
 	-- Open new Pane and Window
 	{
@@ -96,5 +95,57 @@ config.keys = {
 		}),
 	},
 }
+
+-- Add spacer between tabs 
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+
+local function tab_title(tab_info)
+  local title = tab_info.tab_title
+  -- if the tab title is explicitly set, take that
+  if title and #title > 0 then
+    return title
+  end
+  -- Otherwise, use the title from the active pane
+  -- in that tab
+  return tab_info.active_pane.title
+end
+
+wezterm.on(
+  'format-tab-title',
+  function(tab, tabs, panes, config, hover, max_width)
+    local edge_background = '#24273a'
+    local background = '#24273a'
+    local foreground = '#c0c0c0'
+
+    if tab.is_active then
+      background = "#24273a"
+      foreground = "#cad3f5"
+    elseif hover then
+      background = '#3b3052'
+      foreground = '#909090'
+    end
+
+    local edge_foreground = background
+
+    local title = tab_title(tab)
+
+    -- ensure that the titles fit in the available space,
+    -- and that we have room for the edges.
+    title = wezterm.truncate_right(title, max_width - 2)
+
+    return {
+      { Background = { Color = edge_background } },
+      { Foreground = { Color = edge_foreground } },
+      { Text = SOLID_LEFT_ARROW },
+      { Background = { Color = background } },
+      { Foreground = { Color = foreground } },
+      { Text = title },
+      { Background = { Color = edge_background } },
+      { Foreground = { Color = edge_foreground } },
+      { Text = SOLID_RIGHT_ARROW },
+    }
+  end
+)
 
 return config
