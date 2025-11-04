@@ -1,0 +1,77 @@
+[language-server]
+biome = { command = "biome", args = ["lsp-proxy"] }
+
+[language-server.golangci-lint-lsp]
+command = "golang-ci-lint-langserver"
+
+[language-server.golangci-lint-lsp.config]
+command = ["golangci-lint", "run", "--output.json.path", "stdout", "--show-stats=false", "--issues-exit-code=1"]
+
+[language-server.haskell-language-server]
+rootPatterns = ["*.cabal", "stack.yaml", "cabal.project","package.yaml","hie.yaml"]
+filetypes = ["haskell","lhaskell"]
+config.haskell.formattingProvider = "stylish-haskell"
+config.haskell.checkProject = "true"
+config.haskell.checkParents = "AlwaysCheck"
+
+[language-server.tailwindcss-ls]
+config = { userLanguages = { templ = "html" } }
+
+[language-server.vscode-html-language-server]
+config = { userLanguages = { templ = "html" } }
+
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+config = { typescript = { tsdk = "/home/leoco/.local/share/pnpm/global/5/node_modules/typescript/lib" }, environment = "node" }
+
+[[language]]
+name = "javascript"
+language-servers = [ { name = "typescript-language-server" , except-features = ["format"] },"tailwindcss-ls","biome" ]
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [ { name = "typescript-language-server" , except-features = ["format"] },"tailwindcss-ls","biome" ]
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = [ { name = "typescript-language-server" , except-features = ["format"] },"tailwindcss-ls","biome" ]
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = [ { name = "typescript-language-server" , except-features = ["format"] },"tailwindcss-ls","biome" ]
+auto-format = true
+
+[[language]]
+name = "astro"
+scope = "source.astro"
+injection-regex = "astro"
+file-types = ["astro"]
+roots = ["package.json", "astro.config.mjs"]
+language-servers = [{ name = "astro-ls", except-features = ["format"] }, "tailwindcss-ls", "biome"]
+
+[[language]]
+name = "go"
+formatter = { command = "goimports" }
+auto-format = true
+language-servers = ["gopls", "golangci-lint-lsp"]
+
+[[language]]
+name = "templ"
+formatter = { command = "templ", args = ["fmt"] }
+auto-format = true
+language-servers = ["templ","tailwindcss-ls", "vscode-html-language-server"]
+
+[[language]]
+name = "haskell"
+# auto-format = true
+# formatter = { command = "fourmolu", args = ["--stdin-input-file", '$"(pwd)"'] }
+
+[[language]]
+name = "lua"
+formatter = { command = "stylua", args = ["-"] }
+auto-format = true
+
