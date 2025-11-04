@@ -1,0 +1,11 @@
+show=drun
+always_parse_args=true
+show_all=false
+term=kitty
+hide_scroll=false
+print_command=true
+insensitive=true
+prompt=Search
+columns=2
+dynamic_lines=true
+line_wrap=char
