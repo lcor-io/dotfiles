@@ -56,6 +56,9 @@ path add /home/leoco/go/bin
 path add /home/leoco/.cargo/bin
 path add /home/leoco/.cabal/bin
 path add /home/leoco/.ghcup/bin
+path add /home/leoco/.local/share/pnpm
+
+$env.PNPM_HOME = "/home/leoco/.local/share/pnpm"
 
 $env.config.buffer_editor = "nvim"
 

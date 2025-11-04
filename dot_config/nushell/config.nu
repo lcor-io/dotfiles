@@ -909,11 +909,12 @@ def ywg-start [] { ywg | env.starter/start.py --restart }
 # Setup various aliases
 alias pn = pnpm
 alias lzd = lazydocker
-alias ssh = wezterm ssh
+# alias ssh = wezterm ssh
 alias shutdown = systemctl poweroff
 
 # Setup default editor
-$env.config.buffer_editor = "nvim"
+$env.EDITOR = "hx"
+$env.config.buffer_editor = "hx"
 
 # use starship
 use ~/.cache/starship/init.nu
